@@ -11,6 +11,8 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import org.jsoup.nodes.Document;
+
+import java.io.IOException;
 import java.util.Locale;
 
 public class WebViewActivity extends Activity {
@@ -47,9 +49,16 @@ public class WebViewActivity extends Activity {
 
     private class AsyncClass extends AsyncTask<String, Void, String> {
         String html;
+        //
         @Override
         protected String doInBackground(String... strings) {
-
+            Document doc = null;
+            try {
+                doc = Jsoup.connect(strings[0]).get();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("do in background: " + doc.body().text());
             return null;
         }
 
