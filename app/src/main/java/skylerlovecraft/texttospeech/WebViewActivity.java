@@ -10,6 +10,7 @@ import android.speech.tts.TextToSpeech;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
@@ -25,8 +26,8 @@ public class WebViewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(skylerlovecraft.myinternetproject.R.layout.activity_web_view);
-        myWebView = (WebView)findViewById(skylerlovecraft.myinternetproject.R.id.wvMyWebView);
+        setContentView(R.layout.activity_web_view);
+        myWebView = (WebView)findViewById(R.id.wvMyWebView);
         webpage = this.getIntent().getStringExtra("webpage");
         myWebView.loadUrl(webpage);
         html = readPageHTML(webpage);
@@ -34,7 +35,7 @@ public class WebViewActivity extends Activity {
         AsyncClass task = new AsyncClass();
         task.execute(new String[] { webpage });
 
-        findViewById(skylerlovecraft.myinternetproject.R.id.btnSpeaker).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnSpeaker).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setPhasersToStun(text);
