@@ -1,8 +1,7 @@
-package com.ahnelson.csce4623.myinternetproject;
+package skylerlovecraft.texttospeech;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -11,7 +10,6 @@ import android.speech.tts.TextToSpeech;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import java.util.Locale;
 
@@ -25,8 +23,8 @@ public class WebViewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web_view);
-        myWebView = (WebView)findViewById(R.id.wvMyWebView);
+        setContentView(skylerlovecraft.myinternetproject.R.layout.activity_web_view);
+        myWebView = (WebView)findViewById(skylerlovecraft.myinternetproject.R.id.wvMyWebView);
         webpage = this.getIntent().getStringExtra("webpage");
         myWebView.loadUrl(webpage);
         html = readPageHTML(webpage);
@@ -34,7 +32,7 @@ public class WebViewActivity extends Activity {
         AsyncClass task = new AsyncClass();
         task.execute(new String[] { webpage });
 
-        findViewById(R.id.btnSpeaker).setOnClickListener(new View.OnClickListener() {
+        findViewById(skylerlovecraft.myinternetproject.R.id.btnSpeaker).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setPhasersToStun(text);

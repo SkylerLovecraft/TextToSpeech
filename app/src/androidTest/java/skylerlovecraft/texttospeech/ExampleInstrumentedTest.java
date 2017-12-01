@@ -1,4 +1,4 @@
-package com.ahnelson.csce4623.myinternetproject;
+package skylerlovecraft.texttospeech;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.ahnelson.csce4623.myinternetproject", appContext.getPackageName());
+        assertEquals("skylerlovecraft.myinternetproject", appContext.getPackageName());
     }
 }

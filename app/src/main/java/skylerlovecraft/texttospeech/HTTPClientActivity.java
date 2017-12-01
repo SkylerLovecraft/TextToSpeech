@@ -1,4 +1,4 @@
-package com.ahnelson.csce4623.myinternetproject;
+package skylerlovecraft.texttospeech;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,10 +29,10 @@ public class HTTPClientActivity extends FragmentActivity implements DownloadCall
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_httpclient);
+        setContentView(skylerlovecraft.myinternetproject.R.layout.activity_httpclient);
         String website = this.getIntent().getStringExtra("webpage");
         mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), website);
-        mWebView = (WebView)findViewById(R.id.wvHttpClientView);
+        mWebView = (WebView)findViewById(skylerlovecraft.myinternetproject.R.id.wvHttpClientView);
         checkTTS();
         startDownload();
     }

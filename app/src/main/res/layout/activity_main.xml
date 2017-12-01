@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ahnelson.csce4623.myinternetproject.MainActivity">
+    tools:context="skylerlovecraft.texttospeech.MainActivity">
 
     <Button
         android:id="@+id/btnBrowsePage"

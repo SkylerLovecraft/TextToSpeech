@@ -1,4 +1,4 @@
-package com.ahnelson.csce4623.myinternetproject;
+package skylerlovecraft.texttospeech;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,20 +15,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        findViewById(R.id.btnBrowsePage).setOnClickListener(new View.OnClickListener() {
+        setContentView(skylerlovecraft.myinternetproject.R.layout.activity_main);
+        findViewById(skylerlovecraft.myinternetproject.R.id.btnBrowsePage).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 browsePage();
             }
         });
-        findViewById(R.id.btnNextActivity).setOnClickListener(new View.OnClickListener() {
+        findViewById(skylerlovecraft.myinternetproject.R.id.btnNextActivity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nextActivity();
             }
         });
-        findViewById(R.id.btnHttpActivity).setOnClickListener(new View.OnClickListener() {
+        findViewById(skylerlovecraft.myinternetproject.R.id.btnHttpActivity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startHttpActivity();
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void browsePage(){
         String myWebpage;
-        EditText myEditText = (EditText) findViewById(R.id.etWebsite);
+        EditText myEditText = (EditText) findViewById(skylerlovecraft.myinternetproject.R.id.etWebsite);
         myWebpage = myEditText.getText().toString();
         System.out.println(myWebpage);
         if(!myWebpage.startsWith("http://")){
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void nextActivity(){
         String myWebpage;
-        EditText myEditText = (EditText) findViewById(R.id.etWebsite);
+        EditText myEditText = (EditText) findViewById(skylerlovecraft.myinternetproject.R.id.etWebsite);
         myWebpage = myEditText.getText().toString();
         if(!myWebpage.startsWith("http://")){
             if(!myWebpage.startsWith("https://")){
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void startHttpActivity(){
         String myWebpage;
-        EditText myEditText = (EditText) findViewById(R.id.etWebsite);
+        EditText myEditText = (EditText) findViewById(skylerlovecraft.myinternetproject.R.id.etWebsite);
         myWebpage = myEditText.getText().toString();
         if(!myWebpage.startsWith("http://")){
             if(!myWebpage.startsWith("https://")){

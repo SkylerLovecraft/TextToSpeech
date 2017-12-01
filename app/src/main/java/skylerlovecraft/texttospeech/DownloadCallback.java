@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.ahnelson.csce4623.myinternetproject;
+package skylerlovecraft.texttospeech;
 
 import android.net.NetworkInfo;
-import android.support.annotation.IntDef;
 
 /**
  * Sample interface containing bare minimum methods needed for an asynchronous task
