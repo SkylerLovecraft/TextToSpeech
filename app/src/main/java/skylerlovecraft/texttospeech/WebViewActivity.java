@@ -2,14 +2,21 @@ package skylerlovecraft.texttospeech;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.speech.tts.TextToSpeech;
+import android.webkit.WebViewClient;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
@@ -19,25 +26,47 @@ public class WebViewActivity extends Activity {
     String webpage;
     WebView myWebView;
     static String html;
-    Document document;
-    String webpageText, text;
+    String text;
     TextToSpeech textToSpeech;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(skylerlovecraft.myinternetproject.R.layout.activity_web_view);
-        myWebView = (WebView)findViewById(skylerlovecraft.myinternetproject.R.id.wvMyWebView);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(skylerlovecraft.texttospeech.R.layout.activity_web_view);
+        myWebView = (WebView)findViewById(skylerlovecraft.texttospeech.R.id.wvMyWebView);
         webpage = this.getIntent().getStringExtra("webpage");
         myWebView.loadUrl(webpage);
-        html = readPageHTML(webpage);
-        System.out.println(html);
+
+        //AsyncClass for Jsoup in background thread
         AsyncClass task = new AsyncClass();
         task.execute(new String[] { webpage });
-
-        findViewById(skylerlovecraft.myinternetproject.R.id.btnSpeaker).setOnClickListener(new View.OnClickListener() {
+        myWebView.setWebViewClient(new WebViewClient() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                view.loadUrl(request.getUrl().toString());
+                return false;
+            }
+        });
+        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                textToSpeech.setLanguage(Locale.US);
+                textToSpeech.setPitch(1);
+            }
+        });
+        findViewById(skylerlovecraft.texttospeech.R.id.btnTTS).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setPhasersToStun(text);
+                readPageContent(text);
+            }
+        });
+        findViewById(R.id.btnStop).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                makeItStop();
             }
         });
     }
@@ -49,7 +78,8 @@ public class WebViewActivity extends Activity {
 
     private class AsyncClass extends AsyncTask<String, Void, String> {
         String html;
-        //
+        //We do the Jsoup stuff in the background to prevent a long wait on the UI thread
+        //returns string;
         @Override
         protected String doInBackground(String... strings) {
             Document doc = null;
@@ -58,7 +88,8 @@ public class WebViewActivity extends Activity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("do in background: " + doc.body().text());
+            //System.out.println("do in background: " + doc.body().text());
+            text = doc.body().text();
             return null;
         }
 
@@ -93,7 +124,7 @@ public class WebViewActivity extends Activity {
             super();
         }
     }
-    public String readPageHTML(String webpage) {
+    /*public String readPageHTML(String webpage) {
         Ion.with(getApplicationContext())
                 .load(webpage)
                 .asString()
@@ -106,17 +137,13 @@ public class WebViewActivity extends Activity {
                 });
         return html;
     }
-
-    public void setPhasersToStun(String str){
-
-    textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-        @Override
-        public void onInit(int i) {
-            textToSpeech.setLanguage(Locale.US);
-            textToSpeech.setPitch(1);
-        }
-    });
+*/
+    public void readPageContent(String str){
+    System.out.println("content to speak " + str);
     textToSpeech.speak(str, TextToSpeech.QUEUE_FLUSH, null);
+    }
+    public void makeItStop() {
+    textToSpeech.stop();
     }
 
 }

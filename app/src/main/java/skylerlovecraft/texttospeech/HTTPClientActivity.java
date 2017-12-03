@@ -29,10 +29,10 @@ public class HTTPClientActivity extends FragmentActivity implements DownloadCall
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(skylerlovecraft.myinternetproject.R.layout.activity_httpclient);
+        setContentView(skylerlovecraft.texttospeech.R.layout.activity_httpclient);
         String website = this.getIntent().getStringExtra("webpage");
         mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), website);
-        mWebView = (WebView)findViewById(skylerlovecraft.myinternetproject.R.id.wvHttpClientView);
+        mWebView = (WebView)findViewById(skylerlovecraft.texttospeech.R.id.wvHttpClientView);
         checkTTS();
         startDownload();
     }
