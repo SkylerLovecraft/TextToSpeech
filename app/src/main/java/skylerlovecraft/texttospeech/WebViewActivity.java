@@ -31,17 +31,23 @@ public class WebViewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+<<<<<<< HEAD
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(skylerlovecraft.texttospeech.R.layout.activity_web_view);
         myWebView = (WebView)findViewById(skylerlovecraft.texttospeech.R.id.wvMyWebView);
+=======
+        setContentView(R.layout.activity_web_view);
+        myWebView = (WebView)findViewById(R.id.wvMyWebView);
+>>>>>>> de81a4f85484052e1d442f5f6dcc14ef50de5eef
         webpage = this.getIntent().getStringExtra("webpage");
         myWebView.loadUrl(webpage);
 
         //AsyncClass for Jsoup in background thread
         AsyncClass task = new AsyncClass();
         task.execute(new String[] { webpage });
+<<<<<<< HEAD
         myWebView.setWebViewClient(new WebViewClient() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -58,6 +64,10 @@ public class WebViewActivity extends Activity {
             }
         });
         findViewById(skylerlovecraft.texttospeech.R.id.btnTTS).setOnClickListener(new View.OnClickListener() {
+=======
+
+        findViewById(R.id.btnSpeaker).setOnClickListener(new View.OnClickListener() {
+>>>>>>> de81a4f85484052e1d442f5f6dcc14ef50de5eef
             @Override
             public void onClick(View v) {
                 readPageContent(text);
